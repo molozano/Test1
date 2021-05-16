@@ -1,0 +1,66 @@
+tar -zcvf ~/test1.tar.gz ~/ssh_issue_v12_OS_62_OS_64.tar.gz 
+
+mkdir –p ./LIN
+tar -zcvf ~/test.tar.gz ~/ssh_issue_v12_OS_62_OS_64.tar.gz  ~/airspan/dmesg/ /etc/systemd/system/debug_reboot.service /usr/local/Airspan/persistent_config/dmesg
+
+tar -zcvf ~/1_DMESG_Files.tar.gz ~/airspan/dmesg/
+tar -zcvf ~/1a_DMESG_issues_Files.tar.gz /etc/systemd/system/debug_reboot.service/usr/local/Airspan/persistent_config/dmesg
+cp ~/ssh_issue_v12_OS_62_OS_64.tar.gz ./LIN 
+tar -zcvf ~/2_SSH_issue ~/ssh* 
+tar -zcvf ~/3_ssh_issue_v12_OS_62_OS_64.tar.gz  ~/etc/systemd/system/debug_reboot.service
+
+ 
+•	ps -aux | grep mesg (command to check if dmesg process is running in background)
+•	ls /home/airspan/dmesg/ -lthr (check if the folders is created and dmesg is getting updated)
+MELP: Tirar varias veces el cmd y ver si cambia de tamaño. En este caso permences estátici sin variaciones luego de varias interrogaciones                                                                                        
+  
+
+•	 -lthr (check if debug_reboot.service is in the folder)
+
+
+·	If the Script is running and/or logs are available, then:
+·	Copy all from the folder /home/airspan/dmesg/
+·	If for some reason this folder is empty it probably is not mounted for some reason. In this case please copy entire file /usr/local/Airspan/persistent_config/dmesg_folder.
+·	Collect all the information of the script located in /home/Airspan/ 
+  
+
+·	All the files with name ssh_issue 
+·	 
+
+·	ssh_issue.log
+·	 
+
+·	ssh_issue.log.X.gz (all the zip files)
+·	
+·	Collect journalctl_watch.log
+·	Collect journalctl_stuck_detected if available
+·	Run collect_log.sh script that will generate a log.tar.gz file in /tmp folder
+·	Collect all /var/log/ folder
+
+·	Collect all /run/log/journal/ folder
+ 
+·	Check for crashes in the unit /var/crash folder
+MELP: En muchos casos NO TIENE porq no tuvo crashes
+ 
+·	EMS notifications
+
+·	If the Script is not running and/or logs are not available, then there is nothing to escalate. You can open a case for tracking purpose and then close it waiting for reproduction as logs were not available.
+·	Make sure that the Script is left running.
+
+·	Once logs are collected, we need to provide an analysis as complete as possible:
+·	Logs properly organized in a shared folder (FTP preferred, but cloud folders are valid too)
+·	Logs not compressed in a single file. As sometimes the file gets corrupted and generates a waste of time.
+·	At the moment to decompress crashes, dmesg logs or to convert the journal files, the recommendation is to adjust the PC date/time to JST time zone in that way you will see the same timestamps from EMS events and logs messages.
+·	Once log analysis is complete, add to the escalation the main milestones of your analysis (in that way, it will be easier for Tier3 to engage your case):
+·	Filename of your findings.
+·	Timestamp of the events analyzed.
+·	Clear message if the logs collected captured the event or not.
+·	Correlation with EMS events.
+·	Correlation with SW Crashes.
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$
+cd /var/log/pods
+ 
+
